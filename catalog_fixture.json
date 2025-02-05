@@ -1,0 +1,70 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 15,
+    "fields": {
+        "name": "Овощи",
+        "description": "Свежий урожай"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 16,
+    "fields": {
+        "name": "Фрукты",
+        "description": "Тропические фрукты"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 20,
+    "fields": {
+        "name": "Помидор",
+        "description": "Краснодарский сочный помидор",
+        "picture": "",
+        "category": 15,
+        "price": 10.0,
+        "created_at": "2025-02-06",
+        "updated_at": "2025-02-06"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 21,
+    "fields": {
+        "name": "Картошка",
+        "description": "Картошка новый урожай",
+        "picture": "",
+        "category": 15,
+        "price": 10.0,
+        "created_at": "2025-02-06",
+        "updated_at": "2025-02-06"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 22,
+    "fields": {
+        "name": "Ананас",
+        "description": "Ананас растёт в тепле",
+        "picture": "",
+        "category": 16,
+        "price": 10.0,
+        "created_at": "2025-02-06",
+        "updated_at": "2025-02-06"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 23,
+    "fields": {
+        "name": "Апельсин",
+        "description": "Апельсины растут на апельсиновом дереве",
+        "picture": "",
+        "category": 16,
+        "price": 10.0,
+        "created_at": "2025-02-06",
+        "updated_at": "2025-02-06"
+    }
+}
+]
