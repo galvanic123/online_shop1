@@ -49,7 +49,7 @@ class Product(models.Model):
         blank=True,
         related_name="Категории",
     )
-    price = models.FloatField(
+    price = models.DecimalField(
         help_text="Введите стоимость покупки",
     )
     created_at = models.DateField(
