@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block title %}Продукция {% endblock %}
+
+{% block content %}
+
+  <div class="container mt-5">
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name  }}</h5>
+     <p class="card-text">Цена: {{ product.price }} руб.</p>
+     <p>Изображение: <img src="media/images" class="card-img-top" alt="{{ product.name }}"></p>
+     <p class="card-text">{{ product.description }}</p>
+     <a href="#" class="btn btn-primary">Купить</a>
+  </div>
+  </div>
+  </div>
+{% endblock %}
+{% include 'includes/footer.html' %}

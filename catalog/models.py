@@ -37,7 +37,7 @@ class Product(models.Model):
         verbose_name="Описание продукта",
     )
     picture = models.ImageField(
-        upload_to="images/",
+        upload_to="catalog/media/images/",
         blank=True,
         null=True,
         verbose_name="Изображение продукта",
@@ -51,6 +51,9 @@ class Product(models.Model):
     )
     price = models.DecimalField(
         help_text="Введите стоимость покупки",
+        max_digits=100,
+        decimal_places=2
+
     )
     created_at = models.DateField(
         auto_now_add=True,
