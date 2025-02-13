@@ -1,10 +1,12 @@
 {% extends 'catalog/home.html' %}
+{% load my_tags %}
 {% block content %}
 <div class="container">
     <div class="row text-center">
         {% for product in products %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
+                <img src="{{ product.picture | media_filter }}">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
                 </div>
@@ -13,8 +15,9 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <li>- {{ product.description|truncatechars:100 }}</li>
                     </ul>
-                    <button type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}">Купить</button>
-
+                    <div class="btn-group">
+                    <button type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}" role="button">КупитЬ</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,15 +1,16 @@
-{% extends 'catalog/home.html' %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
-{% include 'includes/inc_menu.html' %}
+
+{% block title %}Продукция {% endblock %}
+
 {% block content %}
 
   <div class="container mt-5">
   <div class="card" style="width: 18rem;">
-      <img src="{{ product.picture | media_filter }}">
   <div class="card-body">
     <h5 class="card-title">{{ product.name  }}</h5>
      <p class="card-text">Цена: {{ product.price }} руб.</p>
-
+     <p>Изображение: <img src="media/images" class="card-img-top" alt="{{ product.name }}"></p>
      <p class="card-text">{{ product.description }}</p>
      <a href="#" class="btn btn-primary">Купить</a>
   </div>
