@@ -16,7 +16,7 @@
                         <li>- {{ product.description|truncatechars:100 }}</li>
                     </ul>
                     <div class="btn-group">
-                    <button type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}" role="button">КупитЬ</button>
+                     <a type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}" >Подробно</a>
                     </div>
                 </div>
             </div>
