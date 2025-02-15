@@ -9,9 +9,10 @@
   <div class="card-body">
     <h5 class="card-title">{{ product.name  }}</h5>
      <p class="card-text">Цена: {{ product.price }} руб.</p>
-
+     <p class="card-text">Категория товара: {{ product.category }}</p>
      <p class="card-text">{{ product.description }}</p>
      <a href="#" class="btn btn-primary">Купить</a>
+      <a href="{% url 'catalog:home' %}" class="btn btn-primary">Назад</a>
   </div>
   </div>
   </div>
