@@ -8,7 +8,4 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('title',)
     search_fields = ('title', 'content',)
 
-
-from django.contrib import admin
-
 # Register your models here.
