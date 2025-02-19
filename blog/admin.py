@@ -3,9 +3,9 @@ from .models import Blog
 
 
 @admin.register(Blog)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'content', 'publication_sign')
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'description', 'publication', 'count_of_views')
     list_filter = ('title',)
-    search_fields = ('title', 'content',)
+    search_fields = ('title', 'description')
 
 # Register your models here.

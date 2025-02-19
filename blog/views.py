@@ -1,28 +1,22 @@
-from django.views.generic import DetailView, ListView, DeleteView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-from .models import Blog
-from django.shortcuts import render
+
+from blog.models import Blog
+
 
 class BlogListView(ListView):
     model = Blog
-    template_name = 'blog/home.html'
+    template_name = 'blog/paper_list.html'
     context_object_name = 'blogs'
 
-
     def get_queryset(self):
-        return Blog.objects.filter(publication_sign=True)
+        return Blog.objects.filter(publication=True)
 
-
-class BlogCreateView(CreateView):
-    model = Blog
-    fields = ['title', 'content', 'image', 'count_of_views', 'publication_sign']
-    template_name = 'blog/blog_form.html'
-    success_url = reverse_lazy('blog:home')
 
 class BlogDetailView(DetailView):
     model = Blog
-    template_name = 'blog/blog.html'
+    template_name = 'blog/paper_detail.html'
     context_object_name = 'blog'
 
     def get_object(self, queryset=None):
@@ -32,20 +26,26 @@ class BlogDetailView(DetailView):
         return self.object
 
 
+class BlogCreateView(CreateView):
+    model = Blog
+    fields = ('title', 'description', 'image', 'publication', 'count_of_views')
+    template_name = 'blog/paper_form.html'
+    success_url = reverse_lazy('blog:paper_list')
+
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ['title', 'content', 'image', 'count_of_views', 'publication_sign']
-    template_name = 'blog/blog_form.html'
-    success_url = reverse_lazy('blog:home')
+    fields = ('title', 'description', 'image', 'publication', 'count_of_views')
+    template_name = 'blog/paper_form.html'
+    success_url = reverse_lazy('blog:paper_list')
 
     def get_success_url(self):
-        return reverse('blog:blog_detail', args=[self.kwargs.get('pk')])
+        return reverse('blog:paper_detail', args=[self.kwargs.get('pk')])
 
 
 class BlogDeleteView(DeleteView):
     model = Blog
-    template_name = 'blog/blog_delete.html'
-    success_url = reverse_lazy('blog:home')
+    template_name = 'blog/paper_confirm_delete.html'
+    success_url = reverse_lazy('blog:paper_list')
 
 # Create your views here.

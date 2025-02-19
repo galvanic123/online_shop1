@@ -48,7 +48,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / 'templates'],  # Главная директория с шаблонами
+        'DIRS': [],  # Главная директория с шаблонами
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -106,7 +106,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 
