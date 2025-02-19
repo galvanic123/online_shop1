@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "catalog",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -47,7 +48,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        'DIRS': [],  # Главная директория с шаблонами
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -105,7 +106,7 @@ LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 
 USE_I18N = True
-
+USE_L10N = True
 USE_TZ = True
 
 

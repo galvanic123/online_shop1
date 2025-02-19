@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        {% for paper in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ paper.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ paper.views }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>- {{ paper.description|truncatechars:100 }}</li>
+                        <li>- {{ paper.created_at }}</li>
+                        <li>- {{ paper.publication }}</li>
+                    </ul>
+                    <a class="btn btn-primary mb-2" href="{% url 'blog:paper_detail' paper.pk %}" role="button">Посмотреть</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'blog:paper_update' paper.pk %}" role="button">Редактировать</a>
+                    <a class="btn btn-primary mb-2" href="{% url 'blog:paper_delete' paper.pk %}"
+                       role="button">Удалить</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
