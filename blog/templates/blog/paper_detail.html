@@ -1,11 +1,12 @@
 {% extends 'blog/base.html' %}
+{% load my_tags %}
 {% block title %}Страница статьи{% endblock %}
 {% block content %}
 <body class="text-center">
 <h1>Информация о статье</h1>
 <p>Заголовок: {{ object.title }}</p>
 <p>Содержимое: {{ object.description }}</p>
-<p>Изображение: <img src="/media/{{ object.image }}" alt="{{ object.title }}"></p>
+<p>Изображение: <img src="/media/{{ object.image }}" class="card-img-top" alt="{{ object.title }}"></p>
 <p>Дата создания: {{ object.created_at }}</p>
 <p>Признак публикации: {{ object.publication }}</p>
 <p>Количество просмотров: {{ object.count_of_views }}</p>

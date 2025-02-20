@@ -2,11 +2,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from catalog.views import start_home
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("catalog/", include("catalog.urls", namespace="catalog")),
-    path("blog/", include("blog.urls", namespace="blog")),
+    path("", start_home, name="start_home"),
+    path("catalog/home/", include("catalog.urls", namespace="catalog")),
+    path("blog/paper_list", include("blog.urls", namespace="blog")),
 
 ]
 

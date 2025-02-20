@@ -5,6 +5,10 @@ from django.views.generic import ListView, DetailView
 
 from catalog.models import Product
 
+def start_home(request):
+    return render(request, 'start_home.html')
+
+
 class CatalogHomeView(ListView):
     model = Product
     template_name = 'catalog/base.html'
