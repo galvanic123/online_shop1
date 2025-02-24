@@ -1,9 +1,10 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-
+from django.http import HttpResponse
+from django.views import View
 from blog.models import Blog
-
+from django.shortcuts import render
 
 class BlogListView(ListView):
     model = Blog
@@ -47,5 +48,17 @@ class BlogDeleteView(DeleteView):
     model = Blog
     template_name = 'blog/paper_confirm_delete.html'
     success_url = reverse_lazy('blog:paper_list')
+
+class CatalogContactsView(View):
+    def get(self, request):
+        return render(request, 'blog/contacts.html')
+
+    def post(self, request):
+        #Получение данных из формы
+        name = request.POST.get('name')
+        message = request.POST.get('message')
+        # Обработка данных (например, сохранение в БД, отправка email и т. д.)
+        # Здесь мы просто возвращаем простой ответ
+        return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
 
 # Create your views here.
