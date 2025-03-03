@@ -52,8 +52,8 @@ class ProductForm(forms.ModelForm):
             "полиция",
             "радар",
         ]:
-            self.add_error("name", "запрещенное слово")
-            self.add_error("description", "запрещенное слово")
+            self.add_error("name", "Запрещенное слово")
+            self.add_error("description", "Запрещенное слово")
 
     def clean_price(self):
         cleaned_data = super().clean()
