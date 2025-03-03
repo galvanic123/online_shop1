@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from catalog.forms import ProductForm
 from catalog.models import Product
+
 
 def start_home(request):
     return render(request, 'start_home.html')
@@ -32,6 +35,25 @@ class CatalogDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = "catalog/product_create.html"
+    success_url = reverse_lazy("catalog:home")
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = "catalog/product_create.html"
+    success_url = reverse_lazy("catalog:home")
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = "catalog/product_delete.html"
+    success_url = reverse_lazy("catalog:home")
+
 
 # def home(request):
 #     products = Product.objects.all()

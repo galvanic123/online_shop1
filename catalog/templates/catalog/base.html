@@ -1,27 +1,29 @@
-{% extends 'catalog/home.html' %}
+{% extends 'catalog/home.html'%}
 {% load my_tags %}
+
 {% block content %}
+
 <div class="container">
-    <div class="row text-center">
+    <div class="row text-center mt-5">
         {% for product in products %}
         <div class="col-3">
-            <div class="card mb-4 box-shadow">
+            <div class="card mb-3 box-shadow">
                 <img src="{{ product.picture | media_filter }}">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
-                </div>
+
                 <div class="card-body">
-                    <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
+                    <h1 class="card-title pricing-card-title">$ {{ product.price }}</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{ product.description|truncatechars:100 }}</li>
+                    <li>- {{ product.description|truncatechars:100 }}</li>
                     </ul>
-                    <div class="btn-group">
-                     <a type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}" >Подробно</a>
-                    </div>
+                    <a type="button"  class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}">Описание</a>
+                    <a href="#" class="btn btn-lg btn-block btn-outline-secondary">Купить</a>
+
                 </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-  </div>
+        {% endfor %}
+</div>
 {% endblock %}
