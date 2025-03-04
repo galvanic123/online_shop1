@@ -1,0 +1,20 @@
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% include 'includes/inc_menu.html' %}
+{% block content %}
+
+  <div class="container mt-5">
+  <div class="card" style="width: 25rem;">
+      <img src="{{ product.picture | media_filter }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name  }}</h5>
+     <p class="card-text">Цена: {{ product.price }} руб.</p>
+     <p class="card-text">Категория товара: {{ product.category }}</p>
+     <p class="card-text">{{ product.description }}</p>
+     <p href="{% url 'catalog:product_update' product.id %}" class="btn btn-primary">Редактировать</p>
+     <p href="{% url 'catalog:product_delete' product.id %}" class="btn btn-danger">Удалить</p>
+  </div>
+  </div>
+  </div>
+{% endblock %}
+{% include 'includes/footer.html' %}

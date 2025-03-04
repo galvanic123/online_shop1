@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <style>
+      .button {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 18px
+      transition: background 0.3s;
+      }
+      .button:hover {
+         background: #4CAF50;
+      }
+      .container {
+      text-align: center;
+      margin-top: 100px;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <h1>Выберите приложение</h1>
+      <a href="{% url 'catalog:home' %}" class="button">Приложение Catalog</a>
+      <a href="{% url 'blog:paper_list' %}" class="button">Приложение Blog</a>
+
+    </div>
+</body>
+</html>
