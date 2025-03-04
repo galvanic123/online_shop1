@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from catalog.models import Product
 
@@ -36,24 +37,27 @@ class ProductForm(forms.ModelForm):
             {"class": "form-control", "placeholder": "Введите стоимость"}
         )
 
-    def clean(self):
+    def clean_name(self):
         cleaned_data = super().clean()
         name = cleaned_data.get("name")
-        description = cleaned_data.get("description")
+        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
+        if name:
+            for word in wrong_words:
+                if word in name.lower():
+                    self.add_error("name", ValidationError(f"Найдено запрещенное слово: {word}"))
 
-        if name.lower() and description.lower() in [
-            "казино",
-            "криптовалюта",
-            "крипта",
-            "биржа",
-            "дешево",
-            "бесплатно",
-            "обман",
-            "полиция",
-            "радар",
-        ]:
-            self.add_error("name", "Запрещенное слово")
-            self.add_error("description", "Запрещенное слово")
+        return cleaned_data
+
+    def clean_description(self):
+        cleaned_data = super().clean()
+        description = cleaned_data.get("description")
+        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
+        if description:
+            for word in wrong_words:
+                if word in description.lower():
+                    self.add_error("description", ValidationError(f"Найдено запрещенное слово: {word}"))
+
+        return cleaned_data
 
     def clean_price(self):
         cleaned_data = super().clean()

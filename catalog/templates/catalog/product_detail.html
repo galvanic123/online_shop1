@@ -11,7 +11,7 @@
      <p class="card-text">Цена: {{ product.price }} руб.</p>
      <p class="card-text">Категория товара: {{ product.category }}</p>
      <p class="card-text">{{ product.description }}</p>
-     <p href="{% url 'catalog:product_update' product.pk %}" class="btn btn-primary">Редактировать</p>
+     <p href="{% url 'catalog:product_update' product.id %}" class="btn btn-primary">Редактировать</p>
      <p href="{% url 'catalog:product_delete' product.id %}" class="btn btn-danger">Удалить</p>
   </div>
   </div>
