@@ -31,6 +31,7 @@ class Product(models.Model):
         max_length=150,
         verbose_name="Наименование продукта",
     )
+
     description = models.TextField(
         null=True,
         blank=True,
@@ -57,10 +58,14 @@ class Product(models.Model):
     )
     created_at = models.DateField(
         auto_now_add=True,
+        blank=True,
+        null=True,
         verbose_name="Дата создания",
     )
     updated_at = models.DateField(
         auto_now=True,
+        blank=True,
+        null=True,
         verbose_name="Дата последнего изменения",
     )
 
