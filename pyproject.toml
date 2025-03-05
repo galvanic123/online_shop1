@@ -12,6 +12,7 @@ psycopg2-binary = "^2.9.10"
 python-dotenv = "^1.0.1"
 black = "^25.1.0"
 pygments = "^2.19.1"
+pillow = "^11.1.0"
 
 
 [build-system]
