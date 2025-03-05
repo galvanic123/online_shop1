@@ -1,10 +1,10 @@
 from django import forms
-from django.core.exceptions import ValidationError
-
 from catalog.models import Product
 
 
 class ProductForm(forms.ModelForm):
+    wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар',
+                   'полиция', 'дешево', 'обман', 'биржа']
     class Meta:
         model = Product
         fields = "__all__"
@@ -38,26 +38,16 @@ class ProductForm(forms.ModelForm):
         )
 
     def clean_name(self):
-        cleaned_data = super().clean()
-        name = cleaned_data.get("name")
-        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
-        if name:
-            for word in wrong_words:
-                if word in name.lower():
-                    self.add_error("name", ValidationError(f"Найдено запрещенное слово: {word}"))
-
-        return cleaned_data
+        name = self.cleaned_data.get("name")
+        if any(word in name.lower() for word in self.wrong_words):
+            raise forms.ValidationError("Найдено запрещенное слово")
+        return name
 
     def clean_description(self):
-        cleaned_data = super().clean()
-        description = cleaned_data.get("description")
-        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
-        if description:
-            for word in wrong_words:
-                if word in description.lower():
-                    self.add_error("description", ValidationError(f"Найдено запрещенное слово: {word}"))
-
-        return cleaned_data
+        description = self.cleaned_data.get("description")
+        if any(word in description.lower() for word in self.wrong_words):
+            raise forms.ValidationError("Найдено запрещенное слово")
+        return description
 
     def clean_price(self):
         cleaned_data = super().clean()
