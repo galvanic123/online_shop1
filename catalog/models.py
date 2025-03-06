@@ -51,21 +51,14 @@ class Product(models.Model):
         related_name="Категории",
     )
     price = models.DecimalField(
-        help_text="Введите стоимость покупки",
-        max_digits=100,
-        decimal_places=2
-
+        help_text="Введите стоимость покупки", max_digits=100, decimal_places=2
     )
     created_at = models.DateField(
         auto_now_add=True,
-        blank=True,
-        null=True,
         verbose_name="Дата создания",
     )
     updated_at = models.DateField(
         auto_now=True,
-        blank=True,
-        null=True,
         verbose_name="Дата последнего изменения",
     )
 

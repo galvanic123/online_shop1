@@ -2,6 +2,7 @@ from django import forms
 from catalog.models import Product
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from .validators import validate_positive_price
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -10,7 +11,6 @@ class ProductForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
-
 
         self.fields["name"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Введите название продукта"}
@@ -30,45 +30,23 @@ class ProductForm(forms.ModelForm):
             {"class": "form-control", "placeholder": "Введите стоимость"}
         )
 
-    # def clean_name(self):
-    #     name = self.cleaned_data.get("name")
-    #     if any(word in name.lower() for word in self.wrong_words):
-    #         raise forms.ValidationError("Найдено запрещенное слово")
-    #     return name
-
     def clean_name(self):
-        data = self.cleaned_data['name']
-        forbidden_words = getattr(settings, 'FORBIDDEN_WORDS')
-        for word in forbidden_words:
+        data = self.cleaned_data["name"]
+        for word in settings.FORBIDDEN_WORDS:
             if word.lower() in data.lower():
                 raise ValidationError(f"Запрещённое слово: '{word}'!")
         return data
-
-    # def clean_description(self):
-    #     description = self.cleaned_data.get("description")
-    #     if any(word in description.lower() for word in self.wrong_words):
-    #         raise forms.ValidationError("Найдено запрещенное слово")
-    #     return description
 
     def clean_description(self):
-        data = self.cleaned_data['description']
-        forbidden_words = getattr(settings, 'FORBIDDEN_WORDS')
-        for word in forbidden_words:
+        data = self.cleaned_data["description"]
+        for word in settings.FORBIDDEN_WORDS:
             if word.lower() in data.lower():
                 raise ValidationError(f"Запрещённое слово: '{word}'!")
         return data
 
-
     def clean_price(self):
-        cleaned_data = super().clean()
-        price = cleaned_data.get("price")
-
-        if price is None:
-            raise forms.ValidationError("Цена должна быть указана.")
-
-        if price < 0:
-            raise forms.ValidationError("Цена не может быть отрицательной.")
-
+        price = self.cleaned_data.get("price")
+        validate_positive_price(price)
         return price
 
     def clean_image(self):
