@@ -1,5 +1,7 @@
 from django.db import models
 
+from catalog.validators import validate_positive_price
+
 
 class Category(models.Model):
 
@@ -51,7 +53,7 @@ class Product(models.Model):
         related_name="Категории",
     )
     price = models.DecimalField(
-        help_text="Введите стоимость покупки", max_digits=100, decimal_places=2
+        help_text="Введите стоимость покупки", max_digits=100, decimal_places=2, validators=[validate_positive_price]
     )
     created_at = models.DateField(
         auto_now_add=True,
