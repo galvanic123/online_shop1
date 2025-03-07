@@ -48,7 +48,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [BASE_DIR / 'catalog/templates'],  # Главная директория с шаблонами
+        "DIRS": [BASE_DIR / "catalog/templates"],  # Главная директория с шаблонами
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,13 +127,13 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FORBIDDEN_WORDS = [
-    'казино',
-    'криптовалюта',
-    'крипта',
-    'бесплатно',
-    'радар',
-    'полиция',
-    'дешево',
-    'обман',
-    'биржа'
+    "казино",
+    "криптовалюта",
+    "крипта",
+    "бесплатно",
+    "радар",
+    "полиция",
+    "дешево",
+    "обман",
+    "биржа",
 ]
