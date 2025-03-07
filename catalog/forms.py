@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from .validators import validate_positive_price
 
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -43,7 +44,6 @@ class ProductForm(forms.ModelForm):
             if word.lower() in data.lower():
                 raise ValidationError(f"Запрещённое слово: '{word}'!")
         return data
-
 
     def clean_image(self):
         cleaned_data = super().clean()
