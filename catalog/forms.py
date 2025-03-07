@@ -44,10 +44,10 @@ class ProductForm(forms.ModelForm):
                 raise ValidationError(f"Запрещённое слово: '{word}'!")
         return data
 
-    def clean_price(self):
-        price = self.cleaned_data.get("price")
-        validate_positive_price(price)
-        return price
+    # def clean_price(self):
+    #     price = self.cleaned_data.get("price")
+    #     validate_positive_price(price)
+    #     return price
 
     def clean_image(self):
         cleaned_data = super().clean()
