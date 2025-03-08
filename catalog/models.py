@@ -56,7 +56,6 @@ class Product(models.Model):
         help_text="Введите стоимость покупки",
         max_digits=100,
         decimal_places=2,
-        validators=[validate_positive_price],
     )
     created_at = models.DateField(
         auto_now_add=True,
