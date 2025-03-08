@@ -6,6 +6,12 @@ from .validators import validate_positive_price
 
 
 class ProductForm(forms.ModelForm):
+
+    price = forms.DecimalField(
+        validators=[validate_positive_price],
+        label="Цена",
+    )
+
     class Meta:
         model = Product
         fields = "__all__"
