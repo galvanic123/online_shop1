@@ -9,6 +9,7 @@ urlpatterns = [
     path("", start_home, name="start_home"),
     path("catalog/home/", include("catalog.urls", namespace="catalog")),
     path("blog/paper_list", include("blog.urls", namespace="blog")),
+    path("users/", include("users.urls", namespace="users")),
 ]
 
 if settings.DEBUG:
