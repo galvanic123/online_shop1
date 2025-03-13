@@ -1,23 +1,23 @@
 from django import forms
-from django.core.exceptions import ValidationError
-
 from catalog.models import Product
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from .validators import validate_positive_price
 
 
 class ProductForm(forms.ModelForm):
+
+    price = forms.DecimalField(
+        validators=[validate_positive_price],
+        label="Цена",
+    )
+
     class Meta:
         model = Product
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
-
-        if "image" in self.fields:
-            self.fields["image"].widget.attrs.update(
-                {
-                    "class": "form-control",
-                }
-            )
 
         self.fields["name"].widget.attrs.update(
             {"class": "form-control", "placeholder": "Введите название продукта"}
@@ -38,38 +38,18 @@ class ProductForm(forms.ModelForm):
         )
 
     def clean_name(self):
-        cleaned_data = super().clean()
-        name = cleaned_data.get("name")
-        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
-        if name:
-            for word in wrong_words:
-                if word in name.lower():
-                    self.add_error("name", ValidationError(f"Найдено запрещенное слово: {word}"))
-
-        return cleaned_data
+        data = self.cleaned_data["name"]
+        for word in settings.FORBIDDEN_WORDS:
+            if word.lower() in data.lower():
+                raise ValidationError(f"Запрещённое слово: '{word}'!")
+        return data
 
     def clean_description(self):
-        cleaned_data = super().clean()
-        description = cleaned_data.get("description")
-        wrong_words = ['казино', 'криптовалюта', 'крипта', 'бесплатно', 'радар', 'полиция', 'дешево', 'обман', 'биржа']
-        if description:
-            for word in wrong_words:
-                if word in description.lower():
-                    self.add_error("description", ValidationError(f"Найдено запрещенное слово: {word}"))
-
-        return cleaned_data
-
-    def clean_price(self):
-        cleaned_data = super().clean()
-        price = cleaned_data.get("price")
-
-        if price is None:
-            raise forms.ValidationError("Цена должна быть указана.")
-
-        if price < 0:
-            raise forms.ValidationError("Цена не может быть отрицательной.")
-
-        return price
+        data = self.cleaned_data["description"]
+        for word in settings.FORBIDDEN_WORDS:
+            if word.lower() in data.lower():
+                raise ValidationError(f"Запрещённое слово: '{word}'!")
+        return data
 
     def clean_image(self):
         cleaned_data = super().clean()
