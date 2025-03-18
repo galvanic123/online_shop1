@@ -130,32 +130,30 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FORBIDDEN_WORDS = [
-
-    'казино',
-    'криптовалюта',
-    'крипта',
-    'бесплатно',
-    'радар',
-    'полиция',
-    'дешево',
-    'обман',
-    'биржа'
+    "казино",
+    "криптовалюта",
+    "крипта",
+    "бесплатно",
+    "радар",
+    "полиция",
+    "дешево",
+    "обман",
+    "биржа",
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = "users.CustomUser"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-LOGIN_REDIRECT_URL = 'catalog:home'
-LOGOUT_REDIRECT_URL = 'catalog:home'
-LOGIN_URL = 'users:login'
-
+LOGIN_REDIRECT_URL = "catalog:home"
+LOGOUT_REDIRECT_URL = "catalog:home"
+LOGIN_URL = "users:login"

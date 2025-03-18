@@ -6,9 +6,9 @@ from config.settings import EMAIL_HOST_USER
 
 
 class RegisterView(CreateView):
-    template_name = 'register.html'
+    template_name = "register.html"
     form_class = UserRegistrationForm
-    success_url = reverse_lazy('catalog:home')
+    success_url = reverse_lazy("catalog:home")
 
     def form_valid(self, form):
         # Сохраняем пользователя только если форма валидна
@@ -17,12 +17,11 @@ class RegisterView(CreateView):
         self.send_welcome_mail(user.email)
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
     def send_welcome_mail(self, user_email):
-        subject = 'Добро пожаловать в наш сервис'
-        message = 'Спасибо, что зарегистрировались в нашем сервисе!'
+        subject = "Добро пожаловать в наш сервис"
+        message = "Спасибо, что зарегистрировались в нашем сервисе!"
         from_email = EMAIL_HOST_USER
-        recipient_list = [user_email,]
+        recipient_list = [
+            user_email,
+        ]
         send_mail(subject, message, from_email, recipient_list)

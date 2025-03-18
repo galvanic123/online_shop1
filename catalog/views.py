@@ -38,7 +38,7 @@ class CatalogContactsView(View):
         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
 
 
-class CatalogDetailView(LoginRequiredMixin, DetailView):
+class CatalogDetailView(DetailView):
     model = Product
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
@@ -49,6 +49,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     template_name = "catalog/product_create.html"
     success_url = reverse_lazy("catalog:home")
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
@@ -61,5 +62,3 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:home")
-
-
