@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
     country = models.CharField(max_length=100, blank=True, null=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username',]
 
     class Meta:
         verbose_name = "Пользователь"
