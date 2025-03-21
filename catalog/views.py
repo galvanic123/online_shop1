@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import View
@@ -11,7 +11,6 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product
 
@@ -44,12 +43,12 @@ class CatalogDetailView(DetailView):
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.request.user == self.object.owner:
-            self.object.save()
-            return self.object
-        raise PermissionDenied
+    # def get_object(self, queryset=None):
+    #     self.object = super().get_object(queryset)
+    #     if self.request.user == self.object.owner:
+    #         self.object.save()
+    #         return self.object
+    #     raise PermissionDenied
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product

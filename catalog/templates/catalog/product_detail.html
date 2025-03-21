@@ -11,8 +11,12 @@
      <p class="card-text">Цена: {{ product.price }} руб.</p>
      <p class="card-text">Категория товара: {{ product.category }}</p>
      <p class="card-text">{{ product.description }}</p>
+      {% if perms.catalog.can_unpublish_product or poduct.owner == object.user.email %}
      <a href="{% url 'catalog:product_update' product.id %}" class="btn btn-primary">Редактировать</a>
+      {% endif %}
+      {% if perms.catalog.delete_product or product.owner == object.user.email %}
      <a href="{% url 'catalog:product_delete' product.id %}" class="btn btn-danger">Удалить</a>
+      {% endif %}
   </div>
   </div>
   </div>

@@ -66,7 +66,7 @@ class ProductForm(forms.ModelForm):
             raise forms.ValidationError("Изображение должно быть указано.")
 
 class ProductModeratorForm(forms.ModelForm):
-
     class Meta:
         model = Product
-        fields = ['status']
+        fields = '__all__'
+        exclude = ['status']
