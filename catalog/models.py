@@ -1,10 +1,9 @@
 from django.db import models
-
 from catalog.validators import validate_positive_price
+from users.models import CustomUser
 
 
 class Category(models.Model):
-
     # наименование, описание
     name = models.CharField(
         max_length=150, verbose_name="Наименование категории", unique=True
@@ -65,6 +64,13 @@ class Product(models.Model):
         auto_now=True,
         verbose_name="Дата последнего изменения",
     )
+    owner = models.ForeignKey(
+        CustomUser,
+        verbose_name='Владелец',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
     status = models.BooleanField(default=False, verbose_name="Статус публикации")
 
 
@@ -78,3 +84,4 @@ class Product(models.Model):
         permissions = [
             ("can_unpublish_product", "Can unpublish product"),
         ]
+
