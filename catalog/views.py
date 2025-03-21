@@ -43,13 +43,6 @@ class CatalogDetailView(DetailView):
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
 
-    # def get_object(self, queryset=None):
-    #     self.object = super().get_object(queryset)
-    #     if self.request.user == self.object.owner:
-    #         self.object.save()
-    #         return self.object
-    #     raise PermissionDenied
-
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
@@ -57,11 +50,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("catalog:home")
 
     def form_valid(self, form):
-        product = form.save()
-        user = self.request.user
-        product.owner = user
-        product.save()
-        # form.instance.owner = self.request.user
+        form.instance.owner = self.request.user
         return super().form_valid(form)
 
 
@@ -72,16 +61,11 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("catalog:home")
 
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.request.user == self.object.owner:
-            self.object.save()
-            return self.object
-        raise PermissionDenied
-
     def get_form_class(self):
         user = self.request.user
-        if user.has_perm('product:can_unpublish_product'):
+        # if user == self.object.owner:
+        #     return ProductForm
+        if user.has_perm('catalog:can_unpublish_product'):
             return ProductModeratorForm
         return ProductForm
 
@@ -90,11 +74,3 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
     model = Product
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:home")
-
-
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.request.user == self.object.owner:
-            self.object.save()
-            return self.object
-        raise PermissionDenied

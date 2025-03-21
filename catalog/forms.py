@@ -68,5 +68,5 @@ class ProductForm(forms.ModelForm):
 class ProductModeratorForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = '__all__'
-        exclude = ['status']
+        fields = ['status']
+
