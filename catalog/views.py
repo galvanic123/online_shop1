@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -33,7 +33,7 @@ class CatalogContactsView(View):
         # Получение данных из формы
         name = request.POST.get("name")
         message = request.POST.get("message")
-        # Обработка данных (например, сохранение в БД, отправка email и т. д.)
+        # Обработка данных (например, сохранение в БД, отправка email и т.д.)
         # Здесь мы просто возвращаем простой ответ
         return HttpResponse(f"Спасибо, {name}! Ваше сообщение получено.")
 
@@ -70,7 +70,12 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return ProductForm
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView, UserPassesTestMixin):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:home")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_moderator:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)

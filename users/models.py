@@ -18,6 +18,11 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username',]
 
+    @property
+    def is_moderator(self) -> bool:
+        """Проверяет, является ли пользователь модератором"""
+        return self.groups.filter(name='Moderator of products').exists()
+
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
