@@ -1,12 +1,11 @@
 from django.db import models
-from catalog.validators import validate_positive_price
 from users.models import CustomUser
 
 
 class Category(models.Model):
     # наименование, описание
     name = models.CharField(
-        max_length=150, verbose_name="Наименование категории", unique=True
+        max_length=150, verbose_name="Наименование категории", unique=True,
     )
     description = models.TextField(
         verbose_name="Описание категории",
@@ -49,7 +48,7 @@ class Product(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="Категории",
+        related_name="products",
     )
     price = models.DecimalField(
         help_text="Введите стоимость покупки",
