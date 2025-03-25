@@ -82,10 +82,10 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:home")
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_moderator:
-            raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if not request.user.is_moderator:
+    #         raise PermissionDenied
+    #     return super().dispatch(request, *args, **kwargs)
 
 class ProductsByCategoryView(View):
     model = Category
